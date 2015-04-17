@@ -13,26 +13,10 @@ namespace AlexCoreyApp.DAL
         {
             var students = new List<Student>
             {
-                new Student{FirstName="Alex",LastName="Shelton",Major=Major.Business,ProfessorID=2792,Credits=3,GPA=4.0m}
+                new Student{FirstName="Alex", LastName="Shelton", Major=Major.Business}
             };
 
             students.ForEach(a => context.Students.Add(a));
-            context.SaveChanges();
-
-            var courses = new List<Course>
-            {
-                new Course{CourseID=1234,Title="Web Development",Credits=3, Description="This is the best class I have ever taken!"}
-            };
-
-            courses.ForEach(s => context.Courses.Add(s));
-            context.SaveChanges();
-
-            var enrollments = new List<Enrollment>
-            {
-                new Enrollment{StudentID=1673351,CourseID=1234,Grade=Grade.A}
-            };
-
-            enrollments.ForEach(a => context.Enrollments.Add(a));
             context.SaveChanges();
 
             var professors = new List<Professor>
@@ -43,6 +27,21 @@ namespace AlexCoreyApp.DAL
             professors.ForEach(a => context.Professors.Add(a));
             context.SaveChanges();
 
+            var courses = new List<Course>
+            {
+                new Course{ProfessorID=1, Title="Web Development", Credits=3}
+            };
+
+            courses.ForEach(s => context.Courses.Add(s));
+            context.SaveChanges();
+
+            var enrollments = new List<Enrollment>
+            {
+                new Enrollment{StudentID=1,CourseID=1}
+            };
+
+            enrollments.ForEach(a => context.Enrollments.Add(a));
+            context.SaveChanges();
         }
     }
 }

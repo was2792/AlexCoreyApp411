@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework.Triggers">
+      <HintPath>..\packages\EntityFramework.Triggers.5.0.4\lib\net45\EntityFramework.Triggers.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -159,12 +162,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CourseController.cs" />
-    <Compile Include="Controllers\EnrollmentController.cs" />
+    <Compile Include="Controllers\CoursesController.cs" />
+    <Compile Include="Controllers\EnrollmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ProfessorController.cs" />
-    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\ProfessorsController.cs" />
+    <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="DAL\UniversityContext.cs" />
     <Compile Include="DAL\UniversityInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,27 +246,27 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Student\Create.cshtml" />
-    <Content Include="Views\Student\Delete.cshtml" />
-    <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Student\Edit.cshtml" />
-    <Content Include="Views\Student\Index.cshtml" />
-    <Content Include="Views\Course\Create.cshtml" />
-    <Content Include="Views\Course\Delete.cshtml" />
-    <Content Include="Views\Course\Details.cshtml" />
-    <Content Include="Views\Course\Edit.cshtml" />
-    <Content Include="Views\Course\Index.cshtml" />
-    <Content Include="Views\Enrollment\Create.cshtml" />
-    <Content Include="Views\Enrollment\Delete.cshtml" />
-    <Content Include="Views\Enrollment\Details.cshtml" />
-    <Content Include="Views\Enrollment\Edit.cshtml" />
-    <Content Include="Views\Enrollment\Index.cshtml" />
-    <Content Include="Views\Professor\Create.cshtml" />
-    <Content Include="Views\Professor\Delete.cshtml" />
-    <Content Include="Views\Professor\Details.cshtml" />
-    <Content Include="Views\Professor\Edit.cshtml" />
-    <Content Include="Views\Professor\Index.cshtml" />
-    <Content Include="Views\Transcript\Index.cshtml" />
+    <Content Include="Views\Home\Transcript.cshtml" />
+    <Content Include="Views\Courses\Create.cshtml" />
+    <Content Include="Views\Courses\Delete.cshtml" />
+    <Content Include="Views\Courses\Details.cshtml" />
+    <Content Include="Views\Courses\Edit.cshtml" />
+    <Content Include="Views\Courses\Index.cshtml" />
+    <Content Include="Views\Professors\Create.cshtml" />
+    <Content Include="Views\Professors\Delete.cshtml" />
+    <Content Include="Views\Professors\Details.cshtml" />
+    <Content Include="Views\Professors\Edit.cshtml" />
+    <Content Include="Views\Professors\Index.cshtml" />
+    <Content Include="Views\Students\Create.cshtml" />
+    <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\Details.cshtml" />
+    <Content Include="Views\Students\Edit.cshtml" />
+    <Content Include="Views\Students\Index.cshtml" />
+    <Content Include="Views\Enrollments\Create.cshtml" />
+    <Content Include="Views\Enrollments\Delete.cshtml" />
+    <Content Include="Views\Enrollments\Details.cshtml" />
+    <Content Include="Views\Enrollments\Edit.cshtml" />
+    <Content Include="Views\Enrollments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
