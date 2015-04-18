@@ -4,27 +4,30 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using EntityFramework.Triggers;
+using AlexCoreyApp.DAL;
 
 namespace AlexCoreyApp.Models
 {
-    public class Course
+    public class Course : ITriggerable
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CourseID { get; set; }
+        public int ID { get; set; }
 
-        [DisplayName("Professor Name")]
+        [Required]
         public int ProfessorID { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
         public string Description { get; set; }
 
+        [Range(1, 4)]
         public int Credits { get; set; }
 
         public virtual Professor Professor { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-<<<<<<< HEAD
 
         public Course()
         {
@@ -56,7 +59,5 @@ namespace AlexCoreyApp.Models
                 }
             };
         }
-=======
->>>>>>> origin/master
     }
 }
