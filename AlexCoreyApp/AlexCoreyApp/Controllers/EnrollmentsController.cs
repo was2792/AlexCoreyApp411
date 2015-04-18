@@ -23,13 +23,13 @@ namespace AlexCoreyApp.Controllers
         }
 
         // GET: Enrollments/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? courseID, int? studentID)
         {
-            if (id == null)
+            if (courseID == null || studentID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Enrollment enrollment = db.Enrollments.Find(id);
+            Enrollment enrollment = db.Enrollments.Find(new object[] { courseID, studentID });
             if (enrollment == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace AlexCoreyApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CourseID,StudentID,Date,Grade")] Enrollment enrollment)
+        public ActionResult Create([Bind(Include = "CourseID,StudentID,Date,Grade")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
@@ -65,13 +65,13 @@ namespace AlexCoreyApp.Controllers
         }
 
         // GET: Enrollments/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? courseID, int? studentID)
         {
-            if (id == null)
+            if (courseID == null || studentID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Enrollment enrollment = db.Enrollments.Find(id);
+            Enrollment enrollment = db.Enrollments.Find(new object[] { courseID, studentID });
             if (enrollment == null)
             {
                 return HttpNotFound();
@@ -86,7 +86,7 @@ namespace AlexCoreyApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CourseID,StudentID,Date,Grade")] Enrollment enrollment)
+        public ActionResult Edit([Bind(Include = "CourseID,StudentID,Date,Grade")] Enrollment enrollment)
         {
             if (ModelState.IsValid)
             {
@@ -100,13 +100,13 @@ namespace AlexCoreyApp.Controllers
         }
 
         // GET: Enrollments/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? courseID, int? studentID)
         {
-            if (id == null)
+            if (courseID == null || studentID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Enrollment enrollment = db.Enrollments.Find(id);
+            Enrollment enrollment = db.Enrollments.Find(new object[] { courseID, studentID });
             if (enrollment == null)
             {
                 return HttpNotFound();
@@ -117,9 +117,9 @@ namespace AlexCoreyApp.Controllers
         // POST: Enrollments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int courseID, int studentID)
         {
-            Enrollment enrollment = db.Enrollments.Find(id);
+            Enrollment enrollment = db.Enrollments.Find(new object[] { courseID, studentID });
             db.Enrollments.Remove(enrollment);
             db.SaveChanges();
             return RedirectToAction("Index");

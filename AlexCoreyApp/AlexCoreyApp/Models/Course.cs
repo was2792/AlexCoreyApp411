@@ -25,46 +25,39 @@ namespace AlexCoreyApp.Models
         [Range(1, 4)]
         public int Credits { get; set; }
 
+        public virtual Professor Professor { get; set; }
+
         public virtual ICollection<Enrollment> Enrollments { get; set; }
 
         public Course()
         {
             this.Triggers().Updated += entry =>
                 {
-                    UpdateStudentRecords(entry.Entity.ID);
-                };
-        }
-
-        public static void UpdateStudentRecords(int courseID)
-        {
-            using(UniversityContext db = new UniversityContext())
-            {
-                var students = db.Enrollments
-                    .Where(e => e.CourseID == courseID && e.Grade.HasValue)
-                    .Select(e => e.Student)
-                    .ToList();
-
-                students.ForEach(s =>
+                    using (UniversityContext db = new UniversityContext())
                     {
-                        var enrollments = s.Enrollments
-                            .Where(e => e.Grade.HasValue)
-                            .ToList();
+                        db.Enrollments
+                            .Where(e => e.CourseID == entry.Entity.ID && e.Grade.HasValue)
+                            .Select(e => e.Student)
+                            .ToList()
+                            .ForEach(s => Enrollment.UpdateStudentRecord(s.ID)); 
+                    }
+                };
 
-                        s.Credits = enrollments
-                            .Sum(e => e.Course.Credits);
-                            
-                        if (s.Credits > 0)
+            this.Triggers().Deleting += entry =>
+            {
+                using (UniversityContext db = new UniversityContext())
+                {
+                    db.Enrollments
+                        .Where(e => e.CourseID == entry.Entity.ID)
+                        .ToList()
+                        .ForEach(e =>
                         {
-                            s.GPA = enrollments
-                                .Select(e => new { GradePoints = (int)Enum.Parse(typeof(Points), e.Grade.Value.ToString()) * e.Course.Credits })
-                                .Sum(p => (decimal)p.GradePoints) / s.Credits;
-                        }
-                        else
-                            s.GPA = 4.00M;
-                    });
+                            db.Enrollments.Remove(e);
+                        });
 
-                db.SaveChanges();
-            }
+                    db.SaveChanges();
+                }
+            };
         }
     }
 }

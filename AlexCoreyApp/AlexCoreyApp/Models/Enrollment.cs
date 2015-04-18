@@ -26,12 +26,12 @@ namespace AlexCoreyApp.Models
 
     public class Enrollment : ITriggerable
     {
-        public int ID { get; set; }
+        //public int ID { get; set; }
 
-        [Required]
+        [Key, Column(Order = 0)]
         public int CourseID { get; set; }
 
-        [Required]
+        [Key, Column(Order = 1)]
         public int StudentID { get; set; }
 
         [Column(TypeName="Date"), DataType(DataType.Date)]

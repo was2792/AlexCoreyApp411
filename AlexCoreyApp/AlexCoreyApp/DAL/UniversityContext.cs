@@ -36,6 +36,8 @@ namespace AlexCoreyApp.DAL
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-        }        
+        }
+
+        public System.Data.Entity.DbSet<AlexCoreyApp.Models.Cart> Carts { get; set; }        
     }
 }

@@ -7,10 +7,14 @@ using AlexCoreyApp.Models;
 
 namespace AlexCoreyApp.DAL
 {
-    public class UniversityInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<UniversityContext>
+    public class UniversityInitializer : DropCreateDatabaseAlways<UniversityContext> //System.Data.Entity.DropCreateDatabaseIfModelChanges<UniversityContext>
     {
         protected override void Seed(UniversityContext context)
         {
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Student', RESEED, 1000000);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Professor', RESEED, 1000000);");
+            context.Database.ExecuteSqlCommand("DBCC CHECKIDENT ('Course', RESEED, 1000);");
+
             var students = new List<Student>
             {
                 new Student{FirstName="Alex", LastName="Shelton", Major=Major.Business}
@@ -29,7 +33,7 @@ namespace AlexCoreyApp.DAL
 
             var courses = new List<Course>
             {
-                new Course{ProfessorID=1, Title="Web Development", Credits=3}
+                new Course{ProfessorID=1000000, Title="Web Development", Credits=3}
             };
 
             courses.ForEach(s => context.Courses.Add(s));
@@ -37,7 +41,7 @@ namespace AlexCoreyApp.DAL
 
             var enrollments = new List<Enrollment>
             {
-                new Enrollment{StudentID=1,CourseID=1}
+                new Enrollment{StudentID=1000000,CourseID=1000}
             };
 
             enrollments.ForEach(a => context.Enrollments.Add(a));

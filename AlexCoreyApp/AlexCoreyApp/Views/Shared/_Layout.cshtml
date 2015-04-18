@@ -26,7 +26,7 @@
                     <li>@Html.ActionLink("Professors", "Index", "Professors")</li>
                     <li>@Html.ActionLink("Courses", "Index", "Courses")</li>
                     <li>@Html.ActionLink("Enrollments", "Index", "Enrollments")</li>
-                    
+                    <li>@Html.ActionLink("Carts", "Index", "Carts")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,11 +35,10 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/gridmvc")
     @RenderSection("scripts", required: false)
 </body>
 </html>

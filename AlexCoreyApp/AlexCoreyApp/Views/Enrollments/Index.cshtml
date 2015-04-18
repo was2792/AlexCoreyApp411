@@ -1,51 +1,33 @@
-﻿@model IEnumerable<AlexCoreyApp.Models.Enrollment>
+﻿@using GridMvc.Html
+@model IEnumerable<AlexCoreyApp.Models.Enrollment>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Enrollments</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Course.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Grade)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Course.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Student.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Grade)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+@Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(enrollment => enrollment.CourseID).Titled("Course ID").SortInitialDirection(GridMvc.Sorting.GridSortDirection.Ascending);
+            columns.Add(enrollment => enrollment.Course.Title).Titled("Course Name");
+            columns.Add(enrollment => enrollment.StudentID).Titled("Student ID");
+            columns.Add(enrollment => enrollment.Student.FirstName).Titled("Student Name").RenderValueAs(enrollment => enrollment.Student.FirstName + " " + enrollment.Student.LastName);
+            columns.Add(enrollment => enrollment.Date).Titled("Enrollment Date").Format("{0:MM/dd/yyyy}");
+            columns.Add(enrollment => enrollment.Grade).Titled("Grade");
+            columns.Add().Encoded(false).Sanitized(false).RenderValueAs(enrollment => CustomRenderingOfColumn(enrollment));
+        }).Sortable(true).Filterable(true).WithMultipleFilters().WithPaging(10)
+
+@helper CustomRenderingOfColumn(AlexCoreyApp.Models.Enrollment item)
+{
+    <td class="text-center">
+        @Html.ActionLink("Edit", "Edit", new { courseID = item.CourseID, studentID = item.StudentID }) |
+        @Html.ActionLink("Details", "Details", new { courseID = item.CourseID, studentID = item.StudentID }) |
+        @Html.ActionLink("Delete", "Delete", new { courseID = item.CourseID, studentID = item.StudentID })
+    </td>
 }
 
-</table>
