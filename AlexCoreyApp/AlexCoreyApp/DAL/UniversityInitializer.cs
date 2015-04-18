@@ -17,23 +17,15 @@ namespace AlexCoreyApp.DAL
 
             var students = new List<Student>
             {
-                new Student{FirstName="Alex", LastName="Shelton", Major=Major.Business}
+                new Student{FirstName="Alex",LastName="Shelton",Major=Major.Business,ProfessorID=2792,Credits=3,GPA=4.0m}
             };
 
             students.ForEach(a => context.Students.Add(a));
             context.SaveChanges();
 
-            var professors = new List<Professor>
-            {
-                new Professor{FirstName="Wesley",LastName="Reisz"}
-            };
-
-            professors.ForEach(a => context.Professors.Add(a));
-            context.SaveChanges();
-
             var courses = new List<Course>
             {
-                new Course{ProfessorID=1000000, Title="Web Development", Credits=3}
+                new Course{CourseID=1234,Title="Web Development",Credits=3, Description="This is the best class I have ever taken!"}
             };
 
             courses.ForEach(s => context.Courses.Add(s));
@@ -41,11 +33,28 @@ namespace AlexCoreyApp.DAL
 
             var enrollments = new List<Enrollment>
             {
-                new Enrollment{StudentID=1000000,CourseID=1000}
+<<<<<<< HEAD
+                new Course{ProfessorID=1000000, Title="Web Development", Credits=3}
+=======
+                new Enrollment{StudentID=1673351,CourseID=1234,Grade=Grade.A}
+>>>>>>> origin/master
             };
 
             enrollments.ForEach(a => context.Enrollments.Add(a));
             context.SaveChanges();
+
+            var professors = new List<Professor>
+            {
+<<<<<<< HEAD
+                new Enrollment{StudentID=1000000,CourseID=1000}
+=======
+                new Professor{FirstName="Wesley",LastName="Reisz"}
+>>>>>>> origin/master
+            };
+
+            professors.ForEach(a => context.Professors.Add(a));
+            context.SaveChanges();
+
         }
     }
 }

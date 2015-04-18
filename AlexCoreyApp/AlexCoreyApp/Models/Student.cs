@@ -1,9 +1,5 @@
-﻿using AlexCoreyApp.DAL;
-using EntityFramework.Triggers;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,20 +8,19 @@ namespace AlexCoreyApp.Models
 
     public enum Major
     {
-        Arts, Biology, Business, Engineering, English, Humanities, Mathematics, Music, Undecided
+        Business, Art, Humanities, Biology, Mathmatics, Writing, Music, Engineering
     }
 
-    public class Student : ITriggerable
+    public class Student
     {
         public int ID { get; set; }
 
-        [Required]
+        public int ProfessorID { get; set; }
+
         public string FirstName { get; set; }
 
-        [Required]
         public string LastName { get; set; }
 
-        [Range(0.00, 4.00)]
         public decimal GPA { get; set; }
 
         public int Credits { get; set; }
@@ -33,11 +28,5 @@ namespace AlexCoreyApp.Models
         public Major Major { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-
-        public Student()
-        {
-            this.GPA = 4.00M;
-            this.Credits = 0;
-        }
     }
 }
